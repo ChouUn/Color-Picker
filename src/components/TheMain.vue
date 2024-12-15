@@ -6,22 +6,10 @@ import { onMounted, ref, useTemplateRef, type Ref } from 'vue'
 import Rope from './SpanRope.vue'
 import { collapseSpans, compileSpans, parseToSpans, type Span } from './SpanOps'
 
-const initalSpans = [
-  {
-    alpha: 1,
-    color: '#123456',
-    text: 'Color the content as you like\n染色',
-    selected: false,
-  },
-  {
-    alpha: 1,
-    color: '#789ABC',
-    text: '如你所愿',
-    selected: false,
-  },
-]
+const demoText = `|cffffffffColor the content as you like|n染色|r|cfff59e0b如你所愿|r|n|n|cffdaa520|n基础攻击: 51-57|n护甲: 1.1|n攻击前摇: 0.45|n攻击间隔: 1.7|r|n|cff00ff7f生命回复速度: 0.25|r|n|cff4169e1魔法回复速度: 0.01|r|n|n|cff0042ff力量|r: 19 + 2.0|n|c00ff0303敏捷|r: 22 + 3.7|n|cff0042ff智力|r: 20 + 1.8|n|n攻击距离 300 (近战).|n移动速度 305.|n施法前摇 0.3s.`
+const parsed = parseToSpans(demoText)
 
-const spansRef = ref(initalSpans)
+const spansRef = ref(parsed)
 const editorNodeRef = useTemplateRef('editorNode')
 const editorRef: Ref<ace.Ace.Editor | undefined> = ref()
 const colors = ref(['#000000', '#ffffff', '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#6366f1'])
@@ -75,12 +63,14 @@ onMounted(() => {
         <button v-for="color in colors" :key="color" @click="coloring(color)"
           class="font-bold py-4 px-4 border-2 rounded" :style="{ backgroundColor: color }"></button>
       </div>
-      <Rope v-model="spansRef"></Rope>
+      <div style="background-color: rgb(20, 30, 40);" class="my-2 p-4">
+        <Rope v-model="spansRef"></Rope>
+      </div>
     </div>
 
     <div class="editor-container md:break-before-column">
       <div ref="editorNode" style="height: 200px">
-        {{ compileSpans(initalSpans) }}
+        {{ demoText }}
       </div>
     </div>
   </div>

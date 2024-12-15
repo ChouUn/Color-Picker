@@ -1,7 +1,6 @@
 import $ from 'jquery'
 
 export interface Span {
-  alpha: number
   color: string
   text: string
   selected: boolean
@@ -10,13 +9,10 @@ export interface Span {
 export function compileSpans(spans: Span[]) {
   return spans
     .map((span) => {
-      const { alpha, color, text } = span
-      const alphaHex = Math.floor(alpha * 255)
-        .toString(16)
-        .padStart(2, '0')
+      const { color, text } = span
       const colorHex = color.slice(1)
       const sanitized = text.replace(/\n/g, '|n')
-      return `|c${alphaHex}${colorHex}${sanitized}|r`
+      return `|cff${colorHex}${sanitized}|r`
     })
     .join('')
 }
@@ -149,7 +145,6 @@ export function detectSelection(spans: Span[]) {
 
 function push(spans: Span[], text: string) {
   spans.push({
-    alpha: 1,
     color: '#ffffff',
     text,
     selected: false,
@@ -182,11 +177,7 @@ export function collapseSpans(spans: Span[]) {
     }
     const prev = res[res.length - 1]
 
-    if (
-      prev.color == current.color &&
-      prev.alpha == current.alpha &&
-      prev.selected == current.selected
-    ) {
+    if (prev.color == current.color && prev.selected == current.selected) {
       append(res, current.text)
     } else {
       res.push(current)
@@ -212,7 +203,6 @@ export function parseToSpans(source: string) {
 
     if (part.match(colorPtn)) {
       spans.push({
-        alpha: parseInt(part.slice(2, 4), 16) / 255,
         color: `#${part.slice(4, 10)}`,
         text: '',
         selected: false,

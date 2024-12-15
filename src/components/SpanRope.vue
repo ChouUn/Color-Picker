@@ -22,7 +22,6 @@ const select = () => {
       :class="{ 'bg-slate-300': span.selected }"
       :style="{
         color: span.color,
-        opacity: span.alpha,
       }"
       @mouseup="select"
     >{{ span.text }}</span></pre>
