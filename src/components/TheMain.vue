@@ -2,29 +2,9 @@
 import * as ace from 'ace-builds'
 import 'ace-builds/src-noconflict/mode-text'
 import 'ace-builds/src-noconflict/theme-monokai'
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, ref, useTemplateRef, type Ref } from 'vue'
 import Rope from './SpanRope.vue'
-
-export interface Span {
-  alpha: number
-  color: string
-  text: string
-  selected: boolean
-}
-
-function Compile(spans: Span[]) {
-  return spans
-    .map((span) => {
-      const { alpha, color, text } = span
-      const alphaHex = Math.floor(alpha * 255)
-        .toString(16)
-        .padStart(2, '0')
-      const colorHex = color.slice(1)
-      const sanitized = text.replace(/\n/g, '|n')
-      return `|c${alphaHex}${colorHex}${sanitized}|r`
-    })
-    .join('')
-}
+import { collapseSpans, compileSpans, parseToSpans, type Span } from './SpanOps'
 
 const initalSpans = [
   {
@@ -41,25 +21,39 @@ const initalSpans = [
   },
 ]
 
-const spans = ref(initalSpans)
-const sourceCode = ref(Compile(initalSpans))
-const editorRef = useTemplateRef('editor')
+const spansRef = ref(initalSpans)
+const editorNodeRef = useTemplateRef('editorNode')
+const editorRef: Ref<ace.Ace.Editor | undefined> = ref()
+const colors = ref(['#000000', '#ffffff', '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#6366f1'])
 
 const coloring = (color: string) => {
-  const selection = window.getSelection()
-  if (!selection) return
+  const next = spansRef.value.map((span) => ({
+    ...span,
+    color: span.selected ? color : span.color,
+  }))
+  nextSpans(next)
+}
 
-  // TODO
-  console.log(color)
+const nextSpans = (spans: Span[]) => {
+  const next = collapseSpans(spans)
+  console.log('next', next)
+
+  const compiled = compileSpans(next)
+  if (editorRef.value!.getValue() != compiled) {
+    editorRef.value!.setValue(compiled)
+  }
+
+  spansRef.value = next
+  return next
 }
 
 onMounted(() => {
-  if (!editorRef.value) {
+  if (!editorNodeRef.value) {
     console.error('editorRef is not available')
     return
   }
 
-  const editor = ace.edit(editorRef.value, {
+  const editor = ace.edit(editorNodeRef.value, {
     // default options
   })
   editor.setTheme('ace/theme/monokai')
@@ -67,7 +61,10 @@ onMounted(() => {
 
   editor.on('change', () => {
     // TODO: spans.value = editor.getValue()
+    const spans = parseToSpans(editor.getValue())
+    nextSpans(spans)
   })
+  editorRef.value = editor
 })
 </script>
 
@@ -75,14 +72,15 @@ onMounted(() => {
   <div class="container md:columns-2 mx-auto bg-white p-6 shadow-lg">
     <div>
       <div>
-        <button @click="coloring('red')" class="bg-red-500 text-white font-bold py-4 px-4 rounded"></button>
+        <button v-for="color in colors" :key="color" @click="coloring(color)"
+          class="font-bold py-4 px-4 border-2 rounded" :style="{ backgroundColor: color }"></button>
       </div>
-      <Rope v-model="spans"></Rope>
+      <Rope v-model="spansRef"></Rope>
     </div>
 
     <div class="editor-container md:break-before-column">
-      <div ref="editor" style="height: 200px">
-        {{ sourceCode }}
+      <div ref="editorNode" style="height: 200px">
+        {{ compileSpans(initalSpans) }}
       </div>
     </div>
   </div>

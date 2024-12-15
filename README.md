@@ -1,4 +1,6 @@
-# Color-Editor
+# Color-Picker for WC3
+
+魔兽争霸 3 的调色板，用于生成颜色代码。
 
 This template should help get you started developing with Vue 3 in Vite.
 

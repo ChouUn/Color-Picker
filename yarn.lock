@@ -951,6 +951,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jquery@npm:^3":
+  version: 3.5.32
+  resolution: "@types/jquery@npm:3.5.32"
+  dependencies:
+    "@types/sizzle": "npm:*"
+  checksum: 10c0/4a17ad6819b89026c21323656ab01b0b263f9d470910a87c8740920ff98319d503c7352b85b50134a39724ecbfccabc73aa4c741dfdd460cf8bbe714f9259054
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.15":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -964,6 +973,13 @@ __metadata:
   dependencies:
     undici-types: "npm:~6.20.0"
   checksum: 10c0/2c7b71a040f1ef5320938eca8ebc946e6905caa9bbf3d5665d9b3774a8d15ea9fab1582b849a6d28c7fc80756a62c5666bc66b69f42f4d5dafd1ccb193cdb4ac
+  languageName: node
+  linkType: hard
+
+"@types/sizzle@npm:*":
+  version: 2.3.9
+  resolution: "@types/sizzle@npm:2.3.9"
+  checksum: 10c0/db0277ff62e8ebe6cdae2020fd045fd7fd19f29a3a2ce13c555b14fb00e105e79004883732118b9f2e8b943cb302645e9eddb4e7bdeef1a171da679cd4c32b72
   languageName: node
   linkType: hard
 
@@ -1686,6 +1702,7 @@ __metadata:
   resolution: "color-editor@workspace:."
   dependencies:
     "@tsconfig/node22": "npm:^22.0.0"
+    "@types/jquery": "npm:^3"
     "@types/node": "npm:^22.9.3"
     "@vitejs/plugin-vue": "npm:^5.2.1"
     "@vue/eslint-config-prettier": "npm:^10.1.0"
@@ -1695,9 +1712,10 @@ __metadata:
     autoprefixer: "npm:^10.4.20"
     eslint: "npm:^9.14.0"
     eslint-plugin-vue: "npm:^9.30.0"
+    jquery: "npm:^3.7.1"
     npm-run-all2: "npm:^7.0.1"
     postcss: "npm:^8.4.49"
-    prettier: "npm:^3.4.2"
+    prettier: "npm:^3.4"
     prettier-plugin-tailwindcss: "npm:^0.6.9"
     tailwindcss: "npm:^3.4.16"
     typescript: "npm:^5.7.2"
@@ -2730,6 +2748,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jquery@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "jquery@npm:3.7.1"
+  checksum: 10c0/808cfbfb758438560224bf26e17fcd5afc7419170230c810dd11f5c1792e2263e2970cca8d659eb84fcd9acc301edb6d310096e450277d54be4f57071b0c82d9
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -3565,7 +3590,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.4.2":
+"prettier@npm:^3.4":
   version: 3.4.2
   resolution: "prettier@npm:3.4.2"
   bin:

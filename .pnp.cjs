@@ -28,6 +28,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@tsconfig/node22", "npm:22.0.0"],\
+          ["@types/jquery", "npm:3.5.32"],\
           ["@types/node", "npm:22.10.2"],\
           ["@vitejs/plugin-vue", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:5.2.1"],\
           ["@vue/eslint-config-prettier", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.1.0"],\
@@ -37,6 +38,7 @@ const RAW_RUNTIME_STATE =
           ["autoprefixer", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.4.20"],\
           ["eslint", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.17.0"],\
           ["eslint-plugin-vue", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.32.0"],\
+          ["jquery", "npm:3.7.1"],\
           ["npm-run-all2", "npm:7.0.1"],\
           ["postcss", "npm:8.4.49"],\
           ["prettier", "npm:3.4.2"],\
@@ -1307,6 +1309,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/jquery", [\
+      ["npm:3.5.32", {\
+        "packageLocation": "../../../../home/chouun/.yarn/berry/cache/@types-jquery-npm-3.5.32-f7d77321fa-10c0.zip/node_modules/@types/jquery/",\
+        "packageDependencies": [\
+          ["@types/jquery", "npm:3.5.32"],\
+          ["@types/sizzle", "npm:2.3.9"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/json-schema", [\
       ["npm:7.0.15", {\
         "packageLocation": "../../../../home/chouun/.yarn/berry/cache/@types-json-schema-npm-7.0.15-fd16381786-10c0.zip/node_modules/@types/json-schema/",\
@@ -1322,6 +1334,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/node", "npm:22.10.2"],\
           ["undici-types", "npm:6.20.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/sizzle", [\
+      ["npm:2.3.9", {\
+        "packageLocation": "../../../../home/chouun/.yarn/berry/cache/@types-sizzle-npm-2.3.9-217217649f-10c0.zip/node_modules/@types/sizzle/",\
+        "packageDependencies": [\
+          ["@types/sizzle", "npm:2.3.9"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2344,6 +2365,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["color-editor", "workspace:."],\
           ["@tsconfig/node22", "npm:22.0.0"],\
+          ["@types/jquery", "npm:3.5.32"],\
           ["@types/node", "npm:22.10.2"],\
           ["@vitejs/plugin-vue", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:5.2.1"],\
           ["@vue/eslint-config-prettier", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.1.0"],\
@@ -2353,6 +2375,7 @@ const RAW_RUNTIME_STATE =
           ["autoprefixer", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.4.20"],\
           ["eslint", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.17.0"],\
           ["eslint-plugin-vue", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.32.0"],\
+          ["jquery", "npm:3.7.1"],\
           ["npm-run-all2", "npm:7.0.1"],\
           ["postcss", "npm:8.4.49"],\
           ["prettier", "npm:3.4.2"],\
@@ -3504,6 +3527,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../home/chouun/.yarn/berry/cache/jiti-npm-1.21.6-0bb76563a3-10c0.zip/node_modules/jiti/",\
         "packageDependencies": [\
           ["jiti", "npm:1.21.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["jquery", [\
+      ["npm:3.7.1", {\
+        "packageLocation": "../../../../home/chouun/.yarn/berry/cache/jquery-npm-3.7.1-eeeac0f21e-10c0.zip/node_modules/jquery/",\
+        "packageDependencies": [\
+          ["jquery", "npm:3.7.1"]\
         ],\
         "linkType": "HARD"\
       }]\
