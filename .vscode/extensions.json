@@ -1,8 +1,10 @@
 {
   "recommendations": [
+    "arcanis.vscode-zipfs",
     "Vue.volar",
+    "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
-    "arcanis.vscode-zipfs"
+    "esbenp.prettier-vscode",
   ]
 }

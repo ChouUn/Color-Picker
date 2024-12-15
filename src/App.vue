@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Main from './components/Main.vue'
+import Main from './components/TheMain.vue'
 </script>
 
 <template>
