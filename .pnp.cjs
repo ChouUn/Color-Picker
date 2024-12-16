@@ -34,7 +34,6 @@ const RAW_RUNTIME_STATE =
           ["@vue/eslint-config-prettier", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.1.0"],\
           ["@vue/eslint-config-typescript", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:14.1.4"],\
           ["@vue/tsconfig", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:0.7.0"],\
-          ["ace-builds", "npm:1.36.5"],\
           ["autoprefixer", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.4.20"],\
           ["eslint", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.17.0"],\
           ["eslint-plugin-vue", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.32.0"],\
@@ -2006,15 +2005,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["ace-builds", [\
-      ["npm:1.36.5", {\
-        "packageLocation": "../../../../home/chouun/.yarn/berry/cache/ace-builds-npm-1.36.5-83a91a8c2d-10c0.zip/node_modules/ace-builds/",\
-        "packageDependencies": [\
-          ["ace-builds", "npm:1.36.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["acorn", [\
       ["npm:8.14.0", {\
         "packageLocation": "../../../../home/chouun/.yarn/berry/cache/acorn-npm-8.14.0-dc46f61424-10c0.zip/node_modules/acorn/",\
@@ -2371,7 +2361,6 @@ const RAW_RUNTIME_STATE =
           ["@vue/eslint-config-prettier", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.1.0"],\
           ["@vue/eslint-config-typescript", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:14.1.4"],\
           ["@vue/tsconfig", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:0.7.0"],\
-          ["ace-builds", "npm:1.36.5"],\
           ["autoprefixer", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:10.4.20"],\
           ["eslint", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.17.0"],\
           ["eslint-plugin-vue", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:9.32.0"],\
@@ -4466,14 +4455,14 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["prettier-plugin-tailwindcss", [\
       ["npm:0.6.9", {\
-        "packageLocation": "../../../../home/chouun/.yarn/berry/cache/prettier-plugin-tailwindcss-npm-0.6.9-b8379758a4-10c0.zip/node_modules/prettier-plugin-tailwindcss/",\
+        "packageLocation": "./.yarn/unplugged/prettier-plugin-tailwindcss-virtual-3c81c4c4f6/node_modules/prettier-plugin-tailwindcss/",\
         "packageDependencies": [\
           ["prettier-plugin-tailwindcss", "npm:0.6.9"]\
         ],\
         "linkType": "SOFT"\
       }],\
       ["virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:0.6.9", {\
-        "packageLocation": "./.yarn/__virtual__/prettier-plugin-tailwindcss-virtual-3c81c4c4f6/5/home/chouun/.yarn/berry/cache/prettier-plugin-tailwindcss-npm-0.6.9-b8379758a4-10c0.zip/node_modules/prettier-plugin-tailwindcss/",\
+        "packageLocation": "./.yarn/unplugged/prettier-plugin-tailwindcss-virtual-3c81c4c4f6/node_modules/prettier-plugin-tailwindcss/",\
         "packageDependencies": [\
           ["prettier-plugin-tailwindcss", "virtual:3257a700cccf73dbd678d160e100adc29496c4c7b5bf8a0cf110e508ef99774385d10f55542642e6f2bb7254a3786729a6614749d233c2aaf079bd86e0f0f2e6#npm:0.6.9"],\
           ["@ianvs/prettier-plugin-sort-imports", null],\

@@ -1,4 +1,4 @@
-import $ from 'jquery'
+import $ from "jquery"
 
 export interface Span {
   color: string
@@ -6,85 +6,112 @@ export interface Span {
   selected: boolean
 }
 
-export function compileSpans(spans: Span[]) {
-  return spans
-    .map((span) => {
-      const { color, text } = span
-      const colorHex = color.slice(1)
-      const sanitized = text.replace(/\n/g, '|n')
-      return `|cff${colorHex}${sanitized}|r`
-    })
-    .join('')
-}
-
-function unselectAll(spans: Span[]) {
+export function unselectAll(spans: Span[]) {
   return spans.map((span) => ({ ...span, selected: false }))
 }
 
-function selectOne(spans: Span[], index: number) {
+export function selectOne(spans: Span[], index: number) {
   return spans.map((span, i) => ({ ...span, selected: i == index }))
 }
 
+export function modifyOne(spans: Span[], index: number, text: string) {
+  return spans.map((span, i) => (i == index ? { ...span, text } : span))
+}
+
+export function compileSpans(spans: Span[]) {
+  const unselected = unselectAll(spans)
+  const collapsed = collapseSpans(unselected)
+  return collapsed
+    .map((span) => {
+      const { color, text } = span
+      const colorHex = color.slice(1)
+      const sanitized = text.replace(/\n/g, "|n")
+      if (colorHex == "ffffff") {
+        return sanitized
+      } else {
+        return `|cff${colorHex}${sanitized}|r`
+      }
+    })
+    .join("")
+}
+
 export function detectSelection(spans: Span[]) {
-  /**
-   * If there is no selection, unselect all spans
-   */
+  // If there is no selection,
+  // it dedicates to unselect all spans.
   const selection = window.getSelection()
   if (!selection) return unselectAll(spans)
   if (!selection.focusNode) return unselectAll(spans)
   if (!selection.anchorNode) return unselectAll(spans)
 
-  /**
-   * If start and end are the same, select the one span
-   */
-  const focus = $(selection.anchorNode).parent('[data-span]')
-  const anchor = $(selection.focusNode).parent('[data-span]')
-  console.log('start', focus[0])
-  console.log('end', anchor[0])
-  const focusIndex = focus.parent('[data-spans-container]').children('[data-span]').index(focus)
-  const anchorIndex = anchor.parent('[data-spans-container]').children('[data-span]').index(anchor)
+  const focus = $(selection.anchorNode).parent("[data-span]")
+  const anchor = $(selection.focusNode).parent("[data-span]")
+  const focusIndex = focus
+    .parent("[data-spans-container]")
+    .children("[data-span]")
+    .index(focus)
+  const anchorIndex = anchor
+    .parent("[data-spans-container]")
+    .children("[data-span]")
+    .index(anchor)
   const focusOffset = selection.anchorOffset
   const anchorOffset = selection.focusOffset
-  selection.removeAllRanges()
 
-  console.log(
-    'focusIndex',
-    focusIndex,
-    'focusOffset',
-    focusOffset,
-    'anchorIndex',
-    anchorIndex,
-    'anchorOffset',
-    anchorOffset,
-  )
-
+  // If start and end are the same,
+  // it dedicates to click the span.
   if (focusIndex == anchorIndex && focusOffset == anchorOffset) {
-    return selectOne(spans, focusIndex)
+    // If you're selecting a span,
+    // and to click the span,
+    // expect the selection to be unselected.
+    if (spans[focusIndex].selected) {
+      // selection.removeAllRanges()
+      const unseleted = unselectAll(spans)
+      const collapsed = collapseSpans(unseleted)
+      return collapsed
+    }
+
+    // If you're selecting a part of a span,
+    // and to click the rest of the span,
+    // expect the selection to be the whole span,
+    // but got the rest side of the span.
+
+    // So, we should store the global offset from the head.
+    let offset = 0
+    for (let i = 0; i < focusIndex; i++) {
+      offset += spans[i].text.length
+    }
+    offset += focusOffset
+
+    // Then, we reset the spans to original state,
+    // and find out the span that contains the offset.
+    const unseleted = unselectAll(spans)
+    const collapsed = collapseSpans(unseleted)
+    let index = 0
+    while (index < collapsed.length && offset > collapsed[index].text.length) {
+      offset -= collapsed[index].text.length
+      index++
+    }
+
+    // Finally, we got the correct span.
+    const selected = selectOne(collapsed, index)
+    return selected
   }
 
-  /**
-   * If start and end are different, select the spans between them
-   */
+  // If start and end are different,
+  // it dedicates to select the spans between them.
   let startIndex = focusIndex
   let startOffset = focusOffset
   let endIndex = anchorIndex
   let endOffset = anchorOffset
-  if (focusIndex > anchorIndex || (focusIndex == anchorIndex && focusOffset > anchorOffset)) {
+  if (
+    focusIndex > anchorIndex ||
+    (focusIndex == anchorIndex && focusOffset > anchorOffset)
+  ) {
     startIndex = anchorIndex
     endIndex = focusIndex
     startOffset = anchorOffset
     endOffset = focusOffset
   }
-  console.log(
-    'startIndex',
-    startIndex,
-    'startOffset',
-    startOffset,
-    'endIndex',
-    endIndex,
-    'endOffset',
-    endOffset,
-  )
+  selection.removeAllRanges()
 
   const res = []
   for (let i = 0; i < spans.length; i++) {
@@ -139,13 +166,12 @@ export function detectSelection(spans: Span[]) {
       })
     }
   }
-  console.log('res', res)
   return res
 }
 
 function push(spans: Span[], text: string) {
   spans.push({
-    color: '#ffffff',
+    color: "#ffffff",
     text,
     selected: false,
   })
@@ -169,7 +195,7 @@ export function collapseSpans(spans: Span[]) {
   const res: Span[] = []
   for (let i = 0; i < spans.length; i++) {
     const current = spans[i]
-    if (current.text == '') continue
+    if (current.text == "") continue
 
     if (res.length == 0) {
       res.push(current)
@@ -188,33 +214,36 @@ export function collapseSpans(spans: Span[]) {
 
 export function parseToSpans(source: string) {
   const newlinePtn = /\|n/g
-  const text = source.replace(newlinePtn, '\n')
+  const text = source.replace(newlinePtn, "\n")
 
   const colorPtn = /(\|c[0-9a-fA-F]{2}[0-9a-fA-F]{6})/g
   const endPtn = /\|r/
   const parts = text.split(colorPtn)
 
-  console.log('parts', parts)
-
   const spans: Span[] = []
+  let coloring = false
   for (let i = 0; i < parts.length; i++) {
     const part = parts[i]
-    if (part == '') continue
+    if (part == "") continue
 
     if (part.match(colorPtn)) {
+      coloring = true
       spans.push({
         color: `#${part.slice(4, 10)}`,
-        text: '',
+        text: "",
         selected: false,
       })
-    } else if (part.match(endPtn)) {
-      const [head, tail] = part.split(endPtn)
+    } else if (coloring && part.match(endPtn)) {
+      coloring = false
+      const matched = part.match(endPtn)!
+      const index = matched.index!
+      const head = part.slice(0, index)
+      const tail = part.slice(index + matched[0].length)
       append(spans, head)
       push(spans, tail)
     } else {
       append(spans, part)
     }
   }
-  console.log('spans', spans)
   return spans
 }
