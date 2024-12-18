@@ -6,7 +6,7 @@ import {
   compileSpans,
   parseToSpans,
   type Span,
-  modifyOne,
+  alignSpans,
 } from "./SpanOps"
 
 const sourceText = `Color the content as you like|n染色|cfff59e0b如你所愿|r|n|n|cffdaa520|n基础攻击: 51-57|n护甲: 1.1|n攻击前摇: 0.45|n攻击间隔: 1.7|r|n|cff00ff7f生命回复速度: 0.25|r|n|cff4169e1魔法回复速度: 0.01|r|n|n|cff0042ff力量|r: 19 + 2.0|n|cffff0303敏捷|r: 22 + 3.7|n|cff0042ff智力|r: 20 + 1.8|n|n攻击距离 300 (近战).|n移动速度 305.|n施法前摇 0.3s.`
@@ -42,7 +42,8 @@ const nextSpans = (spans: Span[]) => {
   return collapsed
 }
 
-const changeSource = () => {
+const changeSource = (e: Event) => {
+  const sourceEl = e.target as HTMLElement
   const spans = parseToSpans(sourceRef.value)
   nextSpans(spans)
 }
@@ -52,9 +53,11 @@ const select = () => {
   nextSpans(spans)
 }
 
-const input = (e: Event, index: number) => {
+const input = (e: Event) => {
   const spanEl = e.target as HTMLSpanElement
-  const spans = modifyOne(spansRef.value, index, spanEl.textContent || "")
+  // console.log(JSON.stringify(spanEl.textContent))
+  const spans = alignSpans(spansRef.value, spanEl.textContent || "")
+  // console.log(spans)
   nextSpans(spans)
 }
 </script>
@@ -78,29 +81,37 @@ const input = (e: Event, index: number) => {
         class="my-2 p-4"
       >
         <div>
-          <pre
+          <div
             data-spans-container
             class="text-balance"
             @mouseup="select"
-          ><span
-            v-for="(span, index) in spansRef"
-            data-span
-            :key="index"
-            :class="{ 'bg-slate-300': span.selected }"
-            :style="{
-              color: span.color,
-            }"
-            contenteditable="true"
-            @input="(e) => input(e, index)"
-          >{{ span.text }}</span></pre>
+            contenteditable="plaintext-only"
+            @input="(e) => input(e)"
+          >
+            <span
+              v-for="(span, index) in spansRef"
+              data-span
+              :key="index"
+              :class="{ 'bg-slate-300': span.selected }"
+              :style="{
+                color: span.color,
+              }"
+            >
+              {{ span.text }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
 
-    <pre class="p-4"><textarea
-       class="w-full h-full text-balance"
-       @input="changeSource()"
-       v-model="sourceRef"
-    ></textarea></pre>
+    <div class="p-4">
+      <div
+        class="h-full w-full text-balance"
+        contenteditable="plaintext-only"
+        @input="(e) => changeSource(e)"
+      >
+        {{ sourceRef }}
+      </div>
+    </div>
   </div>
 </template>

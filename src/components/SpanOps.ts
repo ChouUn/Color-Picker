@@ -247,3 +247,32 @@ export function parseToSpans(source: string) {
   }
   return spans
 }
+
+export function alignSpans(spans: Span[], text: string) {
+  let s = 0
+  let e = spans.length
+  while (s < e && text.startsWith(spans[s].text)) {
+    text = text.slice(spans[s].text.length)
+    s += 1
+  }
+  while (s < e && text.endsWith(spans[e - 1].text)) {
+    e -= 1
+    text = text.slice(0, -spans[e].text.length)
+  }
+  if (s == e && text == "") {
+    return spans
+  }
+  if (e - s == 1) {
+    return modifyOne(spans, s, text)
+  }
+
+  const res: Span[] = []
+  for (let i = 0; i < s; i++) {
+    res.push(spans[i])
+  }
+  push(res, text)
+  for (let i = e; i < spans.length; i++) {
+    res.push(spans[i])
+  }
+  return res
+}
